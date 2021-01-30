@@ -9,6 +9,10 @@ const _ = require('underscore');
 
 const Usuario = require('./models/usuario');
 
+app.get('/', function(req, res) {
+    res.end('Hello!');
+});
+
 app.get('/usuario/:id', function(req, res) {
     let id = req.params.id;
 
