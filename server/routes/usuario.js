@@ -1,3 +1,6 @@
+/*=============================================
+=                  Imports                    =
+=============================================*/
 
 const express = require('express');
 
@@ -9,9 +12,13 @@ const _ = require('underscore');
 
 const Usuario = require('./models/usuario');
 
-app.get('/', function(req, res) {
-    res.end('Hello!');
-});
+
+
+/*=============================================
+=                  Routes                     =
+=============================================*/
+
+/* GET ROUTES */
 
 app.get('/usuario/:id', function(req, res) {
     let id = req.params.id;
@@ -30,6 +37,7 @@ app.get('/usuario/:id', function(req, res) {
     });
     
 });
+
 app.get('/usuarios/', function(req, res) {
     
     Usuario.find({}, 'nombre email google')
@@ -52,6 +60,9 @@ app.get('/usuarios/', function(req, res) {
 
     });
 });
+
+/* POST ROUTES */
+
 app.post('/usuario', function(req, res) {
     let body = req.body;
 
@@ -81,6 +92,10 @@ app.post('/usuario', function(req, res) {
     });
     
 });
+
+
+/* PUT */
+
 app.put('/usuario/:id', function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'status_account' ]);
@@ -102,6 +117,9 @@ app.put('/usuario/:id', function(req, res) {
 
     });
 });
+
+
+/* DELETE ROUTES */
 
 app.delete('/usuario/:id', function(req, res) {
     let id = req.params.id;
@@ -130,5 +148,11 @@ app.delete('/usuario/:id', function(req, res) {
         });
     });
 });
+
+
+
+/*=============================================
+=                  Exports                    =
+=============================================*/
 
 module.exports = app;
