@@ -1,3 +1,8 @@
+
+/*=============================================
+=                  Imports                    =
+=============================================*/
+
 const mongoose = require('mongoose');
 
 
@@ -7,6 +12,10 @@ let rolesPermitidos = {
     values: ['ADMIN_ROLE', 'USER_ROLE'],
     message: '{VALUE} no es un role permitido'
 }
+
+
+
+/* Schema Users */
 
 let Schema = mongoose.Schema;
 
@@ -47,6 +56,12 @@ let usuarioSchema = new Schema({
 
 usuarioSchema.plugin( uniqueValidator, {
     message: '{PATH} email debe de ser unico'
-})
+});
+
+
+
+/*=============================================
+=                  Exports                    =
+=============================================*/
 
 module.exports = mongoose.model('usuario', usuarioSchema);
