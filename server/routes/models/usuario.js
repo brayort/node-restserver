@@ -21,7 +21,7 @@ let Schema = mongoose.Schema;
 
 
 let usuarioSchema = new Schema({
-    nombre: {
+    name: {
         type: String,
         required: [true, 'El nombre es necesario'],
 
