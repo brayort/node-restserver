@@ -12,7 +12,7 @@ const _ = require('underscore');
 
 const Usuario = require('./models/usuario');
 
-const { tokenVerification } = require('../config/middlewares/auth');
+const { tokenVerification, tokenVerificationAdminRole } = require('../config/middlewares/auth');
 
 
 
@@ -41,7 +41,7 @@ app.get('/usuario/:id', function(req, res) {
 });
 
 app.get('/usuarios/', tokenVerification, (req, res) => {
-    
+
     Usuario.find({}, 'nombre email google')
     .limit(10)
     .exec((err, usuarios) => {
@@ -98,7 +98,7 @@ app.post('/usuario', tokenVerification, (req, res) => {
 
 /* PUT */
 
-app.put('/usuario/:id', tokenVerification, (req, res) => {
+app.put('/usuario/:id', [tokenVerification, tokenVerificationAdminRole], (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'status_account' ]);
 
@@ -126,7 +126,7 @@ app.put('/usuario/:id', tokenVerification, (req, res) => {
 
 /* DELETE ROUTES */
 
-app.delete('/usuario/:id', tokenVerification, (req, res) => {
+app.delete('/usuario/:id', [tokenVerification, tokenVerificationAdminRole], (req, res) => {
     let id = req.params.id;
 
     Usuario.findByIdAndUpdate( id ,{ status_account: false, new: true },(err, usuarioRemovido) => {
