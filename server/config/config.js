@@ -5,5 +5,20 @@
 
 process.env.PORT = process.env.PORT || 3000;
 
-/*=====  End of Puerto  ======*/
 
+
+/*=============================================
+=                 Expires Token               =
+=============================================*/
+
+// Esta configurado para una hora
+
+process.env.EXPIRES_TOKEN = 60 * 60 * 24 * 30;
+
+
+
+/*=============================================
+=                 Seed Token                  =
+=============================================*/
+
+process.env.SEED_TOKEN = '5PbaqvSV3';

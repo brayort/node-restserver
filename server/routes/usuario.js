@@ -12,6 +12,8 @@ const _ = require('underscore');
 
 const Usuario = require('./models/usuario');
 
+const { tokenVerification } = require('../config/middlewares/auth');
+
 
 
 /*=============================================
@@ -38,7 +40,7 @@ app.get('/usuario/:id', function(req, res) {
     
 });
 
-app.get('/usuarios/', function(req, res) {
+app.get('/usuarios/', tokenVerification, (req, res) => {
     
     Usuario.find({}, 'nombre email google')
     .limit(10)
